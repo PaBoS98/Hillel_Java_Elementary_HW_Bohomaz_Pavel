@@ -1,6 +1,6 @@
 package com.lesson6;
 
-public abstract class Animal implements Voice, Move {
+public abstract class Animal implements Move {
 
     private static int id = -1;
     private byte age;
@@ -36,11 +36,5 @@ public abstract class Animal implements Voice, Move {
     @Override
     public void move() {
         System.out.println("runs on 4 legs");
-    }
-
-    @Override
-    public String voice() {
-        String makeVoice = "Hello, ";
-        return makeVoice;
     }
 }

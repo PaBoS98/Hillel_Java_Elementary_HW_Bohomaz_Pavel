@@ -1,11 +1,12 @@
 package com.lesson6.pets;
 
 import com.lesson6.Animal;
+import com.lesson6.Voice;
 
-public class Pet extends Animal {
+public class Pet extends Animal implements Voice {
 
     private String name;
-    private boolean isVaccinated;
+    private boolean vaccinated; // corrected
 
     public Pet( String color, String name) {
         super(color);
@@ -21,12 +22,12 @@ public class Pet extends Animal {
     }
 
     public void setVaccinated(boolean vaccinated) {
-        isVaccinated = vaccinated;
+        this.vaccinated = vaccinated;
     }
 
     @Override
     public String voice() {
-        String makeVoice = super.voice();
+        String makeVoice = Voice.super.voice();
         if (name != null) makeVoice += "my name is " + name;
         return makeVoice;
     }
@@ -34,6 +35,6 @@ public class Pet extends Animal {
     @Override
     public String toString() {
         return super.toString() + ", name='" + name + "'" +
-                ", isVaccinated=" + isVaccinated;
+                ", vaccinated=" + vaccinated;
     }
 }

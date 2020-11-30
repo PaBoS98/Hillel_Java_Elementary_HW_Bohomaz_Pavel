@@ -1,16 +1,18 @@
 package com.lesson6.pets;
 
-public class GuideDoge extends Dog {
+import com.lesson6.SpecialFunction;
 
-    private boolean isTrained;
+public class GuideDoge extends Dog implements SpecialFunction {
+
+    private boolean trained; // corrected
 
     public GuideDoge(String color, String name, boolean isTrained) {
         super(color, name);
-        this.isTrained = isTrained;
+        this.trained = isTrained;
     }
 
     public void setTrained(boolean trained) {
-        isTrained = trained;
+        this.trained = trained;
     }
 
     @Override
@@ -19,12 +21,13 @@ public class GuideDoge extends Dog {
         return makeVoice;
     }
 
-    public void takeHome () {
-        if (isTrained) System.out.println("I can take you home. Wooof woof!");
+    @Override
+    public String toString() {
+        return super.toString() + ", trained=" + trained;
     }
 
     @Override
-    public String toString() {
-        return super.toString() + ", isTrained=" + isTrained;
+    public void specialFunction() {
+        if (trained) System.out.println("I can take you home. Wooof woof!");
     }
 }

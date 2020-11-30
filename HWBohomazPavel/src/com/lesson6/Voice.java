@@ -1,8 +1,9 @@
 package com.lesson6;
 
-@FunctionalInterface
-interface Voice {
+public interface Voice {
 
-    String voice();
+    default String voice(){ // corrected
+        return "Hello, ";
+    }
 
 }

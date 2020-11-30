@@ -32,7 +32,7 @@ public class MainClass {
         GuideDoge guideDoge = new GuideDoge("white", "Bobik", true);
         System.out.println(guideDoge.toString());
         System.out.println(guideDoge.voice());
-        guideDoge.takeHome();
+        guideDoge.specialFunction();
         guideDoge.move();
 
         System.out.println("____________________________________________");
