@@ -14,7 +14,6 @@ public class CreateArrayList<E> implements Collection<E> {
         arrayList = new Object[DEFAULT_SIZE];
     }
 
-
     @Override
     public boolean add(E o) {
         if (size == arrayList.length) grow();
@@ -34,14 +33,10 @@ public class CreateArrayList<E> implements Collection<E> {
         return true;
     }
 
-    private void grow() { // если при добавлении кол-во объектов равно размеру коллекции, увеличивает >> 1
-        arrayList = Arrays.copyOf(arrayList, arrayList.length + (arrayList.length >> 1));
-    }
-
     @Override
     public boolean remove(int index) {
         size--;
-        for (int i = index; i < arrayList.length - 1; i++) {
+        for (int i = index; i <= size; i++) {
             arrayList[i] = arrayList[i + 1];
         }
         arrayList[arrayList.length - 1] = null;
@@ -49,15 +44,14 @@ public class CreateArrayList<E> implements Collection<E> {
     }
 
     @Override
-    public boolean remove(E o) {
-        size--;
-        for (int i = 0; i < arrayList.length; i++) {
+    public boolean remove(E o) { // corrected: if doesn't find, return false
+        for (int i = 0; i <= size; i++) {
             if (arrayList[i].equals(o)) {
                 remove(i);
-                break;
+                return true;
             }
         }
-        return true;
+        return false;
     }
 
     @Override
@@ -84,18 +78,14 @@ public class CreateArrayList<E> implements Collection<E> {
         return false;
     }
 
-    private boolean equal(Collection<?> o) {
-        for (int i = 0; i < size; i++) {
-            if (!arrayList[i].equals(o.get(i))) return false;
-        }
-        return true;
-    }
-
     @Override
-    public boolean clear() {
-        for (int to = size, i = size = 0; i < to; i++) {
-            arrayList[i] = null;
-        }
+    public boolean clear() { // changed:
+//        for (int to = size, i = size = 0; i < to; i++) {
+//            arrayList[i] = null;
+//        }
+        size = 0;
+        Object[] temp = new Object[DEFAULT_SIZE];
+        arrayList = temp;
         return true;
     }
 
@@ -114,5 +104,17 @@ public class CreateArrayList<E> implements Collection<E> {
         }
         collection += "]";
         return collection;
+    }
+
+    // corrected: all private method moved after public methods
+    private void grow() { // если при добавлении кол-во объектов равно размеру коллекции, увеличивает >> 1
+        arrayList = Arrays.copyOf(arrayList, arrayList.length + (arrayList.length >> 1));
+    }
+
+    private boolean equal(Collection<?> o) {
+        for (int i = 0; i < size; i++) {
+            if (!arrayList[i].equals(o.get(i))) return false;
+        }
+        return true;
     }
 }
