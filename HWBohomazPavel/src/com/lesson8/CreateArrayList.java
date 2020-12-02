@@ -1,7 +1,6 @@
 package com.lesson8;
 
 import java.util.Arrays;
-import java.util.Objects;
 
 public class CreateArrayList<E> implements Collection<E> {
 
