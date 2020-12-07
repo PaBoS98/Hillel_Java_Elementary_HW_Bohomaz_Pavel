@@ -16,6 +16,7 @@ public interface CustomCollection<E> {
     boolean contains(E o);
     boolean clear();
     int size();
+    boolean trim();
     boolean compare(CustomCollection<E> coll);
     E getFirst();
     E getLast();

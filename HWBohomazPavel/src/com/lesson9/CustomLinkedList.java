@@ -24,6 +24,7 @@ public class CustomLinkedList<E> implements CustomCollection<E> {
 
     @Override
     public boolean add(int index, E o) {
+        if (index > size) return false;
         Link current = first;
         for (int i = 0; i < index; i++) {
             current = current.next;
@@ -57,7 +58,7 @@ public class CustomLinkedList<E> implements CustomCollection<E> {
 
     @Override
     public boolean delete(int index) {
-        if (index > size) return false;
+        if (index >= size) return false;
         Link<E> current = first;
         for (int i = 0; i <= index; i++) {
             current = current.next;
@@ -112,6 +113,11 @@ public class CustomLinkedList<E> implements CustomCollection<E> {
     @Override
     public int size() {
         return size;
+    }
+
+    @Override
+    public boolean trim() {
+        return true;
     }
 
     @Override
