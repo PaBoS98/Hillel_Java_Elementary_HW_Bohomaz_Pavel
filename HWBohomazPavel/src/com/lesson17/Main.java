@@ -7,8 +7,6 @@ import java.util.Scanner;
 
 public class Main {
 
-    public static final String SAVE_DIRECTORY = "D:\\Паша\\Junior\\JavaElementary\\HW_BohomazPavel\\HWBohomazPavel\\src\\com\\lesson17\\save.txt";
-
     public static int victoriesP1 = 0;
     public static int victoriesP2 = 0;
 
@@ -40,7 +38,7 @@ public class Main {
                         if (move < 3 && move >= 0) {
                             break;
                         } else if (move == 3) {
-                            try (FileWriter save = new FileWriter(SAVE_DIRECTORY, true)) { // т.к если прибить приложение, то не сохраняет результат сессии
+                            try (FileWriter save = new FileWriter("D:\\Паша\\Junior\\JavaElementary\\HW_BohomazPavel\\HWBohomazPavel\\src\\com\\lesson17\\save.txt", true)) { // т.к если прибить приложение, то не сохраняет результат сессии
                                 save.write(getResultSession(name, "Comp"));
                             } catch (IOException e) {
                                 e.printStackTrace();
@@ -59,7 +57,7 @@ public class Main {
                 countGame--;
             }
         } finally {
-            try (FileWriter save = new FileWriter(SAVE_DIRECTORY, true)) {
+            try (FileWriter save = new FileWriter("D:\\Паша\\Junior\\JavaElementary\\HW_BohomazPavel\\HWBohomazPavel\\src\\com\\lesson17\\save.txt", true)) {
                 save.write(getResultSession(name, "Comp"));
             } catch (IOException e) {
                 e.printStackTrace();
@@ -149,7 +147,7 @@ class Game {
         }
 
         Date today = new Date();
-        try (FileWriter save = new FileWriter(Main.SAVE_DIRECTORY, true)) {
+        try (FileWriter save = new FileWriter("D:\\Паша\\Junior\\JavaElementary\\HW_BohomazPavel\\HWBohomazPavel\\src\\com\\lesson17\\save.txt", true)) {
             save.write("--------------------------------------------------------------\n"
                     + "               " + today + "\n"
                     + "                       " + nameFirstPlayer + " VS " + nameSecondPlayer + "\n"
