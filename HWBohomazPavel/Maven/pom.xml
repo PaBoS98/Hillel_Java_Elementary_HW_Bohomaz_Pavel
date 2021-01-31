@@ -53,7 +53,11 @@
             <artifactId>maven-dependency-plugin</artifactId>
             <version>3.1.1</version>
         </dependency>
-
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>8.0.21</version>
+        </dependency>
     </dependencies>
 
     <build>
