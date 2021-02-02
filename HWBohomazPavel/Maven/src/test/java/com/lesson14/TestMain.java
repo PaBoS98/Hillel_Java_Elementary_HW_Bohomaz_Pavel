@@ -23,7 +23,6 @@ public class TestMain {
 
         Assertions.assertEquals(testToUpperOut, Main.toUpper(testToUpperIn));
     }
-
     @RepeatedTest(5)
     void testFilter() {
         List<String> testFilterIn;
