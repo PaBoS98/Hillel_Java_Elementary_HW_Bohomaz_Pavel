@@ -1,6 +1,10 @@
 package lesson24.resorce;
 
+import lesson24.Main;
+
 import java.util.Scanner;
+
+import static lesson24.Main.*;
 
 public class Game {
 
@@ -12,7 +16,7 @@ public class Game {
     private String[][] drawRes = {{""}, {""}, {""}, {""}, {""}, {""}, {""}, {""}, {""}, {""}, {""}, {""}, {""}, {""}, {""}, {""}, {""}, {""}, {""}, {""}, {""}, {""}};
     private String winner;
 
-    public Game(int secondPlayer, String nameP2) {
+    public Game(int secondPlayer, String nameP2) throws Exception {
         nameSecondPlayer = nameP2;
         choose(move(), secondPlayer);
     }
@@ -30,6 +34,8 @@ public class Game {
     }
 
     private void choose(int firstPlayer, int secondPlayer) {
+        String moveFirstPlayer = null;
+        String moveSecondPlayer = null;
         int[] array = {firstPlayer, 999, secondPlayer}; // 999 что, бы попал в дэфолт
         for (int a : array) {
             switch (a) {
@@ -39,6 +45,8 @@ public class Game {
                             drawRes[j][k] += Figure.rock()[j][k];
                         }
                     }
+                    if (firstPlayer == 0) moveFirstPlayer = "rock";
+                    if (secondPlayer == 0) moveSecondPlayer = "rock";
                     break;
                 case 1:
                     for (int j = 0; j < drawRes.length; j++) {
@@ -46,6 +54,8 @@ public class Game {
                             drawRes[j][k] += Figure.scissors()[j][k];
                         }
                     }
+                    if (firstPlayer == 1) moveFirstPlayer = "scissors";
+                    if (secondPlayer == 1) moveSecondPlayer = "scissors";
                     break;
                 case 2:
                     for (int j = 0; j < drawRes.length; j++) {
@@ -53,6 +63,8 @@ public class Game {
                             drawRes[j][k] += Figure.paper()[j][k];
                         }
                     }
+                    if (firstPlayer == 2) moveFirstPlayer = "paper";
+                    if (secondPlayer == 2) moveSecondPlayer = "paper";
                     break;
                 default:
                     for (int j = 0; j < drawRes.length; j++) {
@@ -65,13 +77,18 @@ public class Game {
 
         chooseWinner(firstPlayer, secondPlayer);
         Logging.gameResLog(winner);
+        loggerInfo.info("ID: " + gameId + "|" + nameFirstPlayer + " choose - " + count + " games, played - "
+                + (count - countGame) + " games, left to play - " + countGame);
+        loggerInfo.info("ID: " + gameId + "|" + "First player choose - " + moveFirstPlayer + " | second player choose - " + moveSecondPlayer);
+        resultsInfo.info("ID: " + gameId + "|" + "Winner - " + winner);
+
     }
 
-    private int move () {
+    private int move () throws Exception {
         Scanner scanner = new Scanner(System.in);
-        int move;
+        int move = 0;
         System.out.println("Сделайте выбор: \n" +
-                "  0 - камень | 1 - ножници | 2 - бумага | 3 - выйти");
+                "  0 - камень | 1 - ножници | 2 - бумага | 3 - выйти | 4 - throw exception))");
 
         while (true) {
             if (scanner.hasNextInt()) {
@@ -80,11 +97,22 @@ public class Game {
                     break;
                 } else if (move == 3) {
                     Logging.loadingGameLog();
+                    loggerDebug.debug("ID: " + gameId + "|" + "Player: " + Game.nameFirstPlayer + " left the game!");
                     System.exit(0);
+                } else if (move == 4) {
+                    int random = (int) (Math.random() * 5);
+//                    int random = 2;
+//                    System.out.println(random);
+                    if (random == 1) throw new NullPointerException();
+                    else if (random == 2) throw new NumberFormatException();
+                    else if (random == 3) throw new RuntimeException();
+                    else throw new Exception();
                 } else {
+                    loggerWarn.warn("ID: " + gameId + "|" + "incorrect input (" + move + ")");
                     System.out.println("0 - камень | 1 - ножници | 2 - бумага | 3 - выйти");
                 }
             } else {
+                loggerWarn.warn("ID: " + gameId + "|" + "incorrect input (" + scanner + ")");
                 System.out.println("0 - камень | 1 - ножници | 2 - бумага | 3 - выйти");
                 scanner.next();
             }

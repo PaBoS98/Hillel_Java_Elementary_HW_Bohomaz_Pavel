@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration>
     <include resource="org/springframework/boot/logging/logback/base.xml"/>
-    <property name="LOG_FOLDER" value="D:/Pasha/Junior/JavaElementary/logs"/>
+    <property name="LOG_FOLDER" value="D:/Pasha/Junior/MY/Hillel_Java_Elementary_HW_Bohomaz_Pavel/logs"/>
 
     <appender name="debug_log"
               class="ch.qos.logback.core.rolling.RollingFileAppender">
@@ -37,6 +37,30 @@
 
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
             <fileNamePattern>${LOG_FOLDER}/info/archive/info-%d{yyyy-MM-dd}.%i.log.gz</fileNamePattern>
+            <timeBasedFileNamingAndTriggeringPolicy
+                    class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                <!-- or whenever the file size reaches 10MB -->
+                <maxFileSize>10MB</maxFileSize>
+            </timeBasedFileNamingAndTriggeringPolicy>
+            <!-- keep 1 days' worth of history -->
+            <maxHistory>1</maxHistory>
+            <totalSizeCap>100MB</totalSizeCap>
+        </rollingPolicy>
+        <encoder>
+            <pattern>%d [%-5level] [%-14.14thread] - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <appender name="results_log"
+              class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${LOG_FOLDER}/results/results.log</file>
+
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <level>INFO</level>
+        </filter>
+
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${LOG_FOLDER}/results/archive/results-%d{yyyy-MM-dd}.%i.log.gz</fileNamePattern>
             <timeBasedFileNamingAndTriggeringPolicy
                     class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
                 <!-- or whenever the file size reaches 10MB -->
@@ -112,6 +136,9 @@
     <logger name="logger.info" level="INFO">
         <appender-ref ref="info_log"/>
     </logger>
+    <logger name="results.info" level="INFO">
+        <appender-ref ref="results_log"/>
+    </logger>
 
     <logger name="logger.warn" level="WARN">
         <appender-ref ref="warn_log"/>
@@ -122,7 +149,7 @@
     </logger>
 
     <root level="WARN">
-        <appender-ref ref="STDOUT" />
+        <appender-ref ref="STDOUT"/>
     </root>
 
 </configuration>
