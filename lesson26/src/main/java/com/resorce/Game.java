@@ -1,8 +1,8 @@
-package lesson24.resorce;
+package com.resorce;
 
 import java.util.Scanner;
 
-import static lesson24.Main.*;
+import static com.Main.*;
 
 public class Game {
 

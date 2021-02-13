@@ -1,12 +1,14 @@
-package lesson24;
+package com;
 
-import lesson24.resorce.Game;
-import lesson24.resorce.Logging;
-import lesson24.resorce.Registration;
+import com.resorce.Game;
+import com.resorce.Logging;
+import com.resorce.Registration;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.nio.file.FileSystems;
+import java.util.Locale;
+import java.util.ResourceBundle;
 
 public class Main {
 
@@ -22,9 +24,14 @@ public class Main {
 
     public static final String WORK_DIRECTORY = FileSystems.getDefault()
             .getPath("")
-            .toAbsolutePath().toString() + "\\lesson24\\src\\main\\java\\lesson24\\save.txt";
+            .toAbsolutePath().toString() + "\\lesson26\\src\\main\\java\\com\\save.txt";
 
     public static void main(String[] args){
+
+        Locale locale = new Locale("ru");
+        ResourceBundle resourceBundle = ResourceBundle.getBundle("com.resorce.bundle.text");
+        System.out.println(resourceBundle.getString("name"));
+
 
         Registration.regPlayer();
         countGame = Registration.numberOfGame();

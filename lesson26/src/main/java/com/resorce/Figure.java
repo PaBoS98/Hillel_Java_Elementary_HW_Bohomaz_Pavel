@@ -1,4 +1,4 @@
-package lesson24.resorce;
+package com.resorce;
 
 public class Figure {
 

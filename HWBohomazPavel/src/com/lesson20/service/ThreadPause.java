@@ -1,5 +1,6 @@
 package com.lesson20.service;
 
+
 import com.lesson20.Main;
 
 public class ThreadPause {

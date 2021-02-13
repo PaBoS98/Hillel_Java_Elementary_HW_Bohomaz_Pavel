@@ -1,6 +1,6 @@
-package lesson24.resorce;
+package com.resorce;
 
-import lesson24.Main;
+import com.Main;
 
 import java.io.FileWriter;
 import java.io.IOException;
