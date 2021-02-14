@@ -1,6 +1,6 @@
 package com.resorce;
 
-import com.Main;
+import com.Lesson26;
 
 import java.io.FileWriter;
 import java.io.IOException;
@@ -26,7 +26,7 @@ public class Logging {
                     Game.nameFirstPlayer + " - " + Game.victoriesP1 + " victories | " + Game.nameSecondPlayer + " - " + Game.victoriesP2 + " victories\n"
                     + "^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n";
         }
-        try (FileWriter save = new FileWriter(Main.WORK_DIRECTORY, true)) {
+        try (FileWriter save = new FileWriter(Lesson26.WORK_DIRECTORY, true)) {
             save.write(gameLog);
         } catch (IOException e) {
             e.printStackTrace();

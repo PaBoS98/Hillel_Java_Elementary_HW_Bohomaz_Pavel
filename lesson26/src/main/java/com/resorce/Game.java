@@ -2,7 +2,7 @@ package com.resorce;
 
 import java.util.Scanner;
 
-import static com.Main.*;
+import static com.Lesson26.*;
 
 public class Game {
 
@@ -87,8 +87,8 @@ public class Game {
     private int move () throws Exception {
         Scanner scanner = new Scanner(System.in);
         int move = 0;
-        System.out.println("Сделайте выбор: \n" +
-                "  0 - камень | 1 - ножници | 2 - бумага | 3 - выйти | 4 - throw exception))");
+
+        loggerCon.debug(resourceBundle.getString("choose"));
 
         while (true) {
             if (scanner.hasNextInt()) {
@@ -107,11 +107,11 @@ public class Game {
                     else throw new Exception();
                 } else {
                     loggerWarn.warn("ID: " + gameId + "|" + "incorrect input (" + move + ")");
-                    System.out.println("0 - камень | 1 - ножници | 2 - бумага | 3 - выйти");
+                    loggerCon.debug(resourceBundle.getString("choose"));
                 }
             } else {
                 loggerWarn.warn("ID: " + gameId + "|" + "incorrect input (" + scanner + ")");
-                System.out.println("0 - камень | 1 - ножници | 2 - бумага | 3 - выйти");
+                loggerCon.debug(resourceBundle.getString("choose"));
                 scanner.next();
             }
         }
@@ -128,14 +128,14 @@ public class Game {
         int winnerCode = resultsMatrix[firstPlayer][secondPlayer];
 
         if (winnerCode == 3) {
-            winner = "Ничья";
+            winner = resourceBundle.getString("draw");
             victoriesP1++;
             victoriesP2++;
         } else if (winnerCode == 1) {
-            winner = "Победил: " + nameFirstPlayer;
+            winner = resourceBundle.getString("won") + nameFirstPlayer;
             victoriesP1++;
         } else {
-            winner = "Победил: " + nameSecondPlayer;
+            winner = resourceBundle.getString("won") + nameSecondPlayer;
             victoriesP2++;
         }
     }

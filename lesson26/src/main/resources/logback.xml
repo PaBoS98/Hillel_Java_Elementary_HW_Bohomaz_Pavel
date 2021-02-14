@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration>
     <include resource="org/springframework/boot/logging/logback/base.xml"/>
-    <property name="LOG_FOLDER" value="D:/Pasha/Junior/MY/Hillel_Java_Elementary_HW_Bohomaz_Pavel/lesson26/logs"/>
+    <property name="LOG_FOLDER" value="D:/Pasha/Junior/Hillel_Java_Elementary_HW_Bohomaz_Pavel/lesson26/logs"/>
     <appender name="debug_log"
               class="ch.qos.logback.core.rolling.RollingFileAppender">
         <file>${LOG_FOLDER}/debug/debug.log</file>
@@ -123,10 +123,21 @@
     </appender>
 
     <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
-        <encoder>
-            <pattern>%d{HH:mm:ss.SSS} %-5level %logger{36} - %msg%n</pattern>
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <level>DEBUG</level>
+            <onMatch>ACCEPT</onMatch>
+            <onMismatch>DENY</onMismatch>
+        </filter>
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <charset>UTF-8</charset>
+            <outputPatternAsHeader>true</outputPatternAsHeader>
+            <pattern>%msg%n</pattern>
         </encoder>
     </appender>
+
+    <logger name="logger.stdout" level="DEBUG">
+        <appender-ref ref="STDOUT"/>
+    </logger>
 
     <logger name="logger.debug" level="DEBUG">
         <appender-ref ref="debug_log"/>
@@ -147,10 +158,6 @@
     <logger name="logger.error" level="ERROR">
         <appender-ref ref="error_log"/>
     </logger>
-
-    <root level="WARN">
-        <appender-ref ref="STDOUT"/>
-    </root>
 
 </configuration>
 
