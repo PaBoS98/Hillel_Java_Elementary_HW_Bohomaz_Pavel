@@ -15,6 +15,7 @@ public class Main {
     public static final Logger resultsInfo = LoggerFactory.getLogger("results.info");
     public static final Logger loggerWarn = LoggerFactory.getLogger("logger.warn");
     public static final Logger loggerError = LoggerFactory.getLogger("logger.error");
+    public static final Logger loggerCon = LoggerFactory.getLogger("logger.stdout");
 
     public static int count;
     public static int countGame;
@@ -25,7 +26,6 @@ public class Main {
             .toAbsolutePath().toString() + "\\lesson24\\src\\main\\java\\lesson24\\save.txt";
 
     public static void main(String[] args){
-
         Registration.regPlayer();
         countGame = Registration.numberOfGame();
         count = countGame;

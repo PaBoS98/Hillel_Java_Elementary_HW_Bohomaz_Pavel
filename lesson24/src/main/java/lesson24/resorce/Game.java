@@ -1,5 +1,7 @@
 package lesson24.resorce;
 
+import lesson24.Main;
+
 import java.util.Scanner;
 
 import static lesson24.Main.*;
@@ -87,7 +89,7 @@ public class Game {
     private int move () throws Exception {
         Scanner scanner = new Scanner(System.in);
         int move = 0;
-        System.out.println("Сделайте выбор: \n" +
+        loggerCon.info("Сделайте выбор: \n" +
                 "  0 - камень | 1 - ножници | 2 - бумага | 3 - выйти | 4 - throw exception))");
 
         while (true) {
@@ -107,11 +109,11 @@ public class Game {
                     else throw new Exception();
                 } else {
                     loggerWarn.warn("ID: " + gameId + "|" + "incorrect input (" + move + ")");
-                    System.out.println("0 - камень | 1 - ножници | 2 - бумага | 3 - выйти");
+                    loggerCon.info("0 - камень | 1 - ножници | 2 - бумага | 3 - выйти");
                 }
             } else {
                 loggerWarn.warn("ID: " + gameId + "|" + "incorrect input (" + scanner + ")");
-                System.out.println("0 - камень | 1 - ножници | 2 - бумага | 3 - выйти");
+                loggerCon.info("0 - камень | 1 - ножници | 2 - бумага | 3 - выйти");
                 scanner.next();
             }
         }
