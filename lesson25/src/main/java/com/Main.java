@@ -17,23 +17,24 @@ public class Main {
 
     public static void main(String[] args) {
 
-        session = HibernateUtil.getSessionFactory().openSession();
-        session.beginTransaction();
 
-        System.out.println("Show all students");
-        System.out.println(Queries.getStudent(session));
-        System.out.println("------------------------------------------");
-        System.out.println("Add new student");
-        Queries.addStudent(session, specify());
-        System.out.println("------------------------------------------");
-        System.out.println("Show all students");
-        System.out.println(Queries.getStudent(session));
-        System.out.println("------------------------------------------");
-        System.out.println("Show student by id 5");
-        System.out.println(Queries.getStudent(session, 2));
-        System.out.println("------------------------------------------");
-        System.out.println("Show a student whose name is Elon Musk");
-        System.out.println(Queries.getStudent(session, "Blinova Khana Glebovna"));
+//        session = HibernateUtil.getSessionFactory().openSession();
+//        session.beginTransaction();
+//
+//        System.out.println("Show all students");
+//        System.out.println(Queries.getStudent(session));
+//        System.out.println("------------------------------------------");
+//        System.out.println("Add new student");
+//        Queries.addStudent(session, specify());
+//        System.out.println("------------------------------------------");
+//        System.out.println("Show all students");
+//        System.out.println(Queries.getStudent(session));
+//        System.out.println("------------------------------------------");
+//        System.out.println("Show student by id 5");
+//        System.out.println(Queries.getStudent(session, 2));
+//        System.out.println("------------------------------------------");
+//        System.out.println("Show a student whose name is Elon Musk");
+//        System.out.println(Queries.getStudent(session, "Blinova Khana Glebovna"));
 
     }
 
@@ -78,5 +79,12 @@ public class Main {
             }
         }
         return newStudent;
+    }
+
+    public static void test() {
+        for (int i = 0; i < 10; i++) {
+            System.out.println(i);
+            if (i == 3) return;
+        }
     }
 }
