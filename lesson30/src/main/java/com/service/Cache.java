@@ -3,6 +3,7 @@ package com.service;
 import com.Main;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.service.enums.LogMassage;
 
 import java.util.Date;
 import java.util.HashMap;
@@ -10,10 +11,10 @@ import java.util.Map;
 
 /**
  * @author Bohomaz Pavel
- * @version 0.0.1
+ * @version 0.0.2
  * <p>Class for creating a cache</p>
  */
-public abstract class Cache {
+public class Cache implements CacheInterface{
 
     private Map<String, Map<String, Object>> caches;
     private boolean deathSwitch = false;
@@ -26,27 +27,22 @@ public abstract class Cache {
      */
     public Cache() {
         this.caches = new HashMap<>();
-        Main.loggerDebug.debug("Create immortal cache");
+        Main.loggerDebug.debug(LogMassage.IMMORTAL_CACHE.toString());
     }
 
     /**
      * Constructor with param for create mortal Cache
+     *
      * @param t - Set milliseconds to cache life
      */
     public Cache(int t) {
         this.caches = new HashMap<>();
         this.deathSwitch = true;
         this.deadTime = t;
-        Main.loggerDebug.debug("Create mortal cache, lifetime = " + deadTime);
+        Main.loggerDebug.debug(String.format(LogMassage.MORTAL_CACHE.toString(), deadTime));
     }
 
-    /**
-     * Method keeps the object in the cache
-     * @param cache - Set name cache
-     * @param key - Set key cache
-     * @param o - Set object cache
-     * @return - return boolean value
-     */
+    @Override
     public boolean put(String cache, String key, Object o) {
         Map<String, Object> cacheObject = new HashMap<>();
         if (this.caches.get(cache) == null) {
@@ -84,22 +80,11 @@ public abstract class Cache {
         } else {
             this.caches.get(cache).put(key, o);
         }
-        Main.loggerInfo.info("Add new cache: " + cache + " - " + cacheObject);
+        Main.loggerInfo.info(String.format(LogMassage.ADD_CACHE.toString(), cache, cacheObject));
         return true;
     }
 
-    /**
-     * Method keeps the object in the cache using rest request
-     * Needs to be overridden according to your request
-     */
-    abstract public void put();
-
-    /**
-     * Method get the object stored in the cache
-     * @param cache - Specifies the name of the desired cache
-     * @param key - Specifies the key of the desired cache
-     * @return - Returns the object that was saved in the cache If there is no such object, it will return null
-     */
+    @Override
     public Object getFromCache(String cache, String key) {
         Object o;
         try {
@@ -107,42 +92,29 @@ public abstract class Cache {
         } catch (NullPointerException e) {
             o = null;
         }
-        if (o != null) Main.loggerInfo.info("Get cache: " + cache + " - " + o);
-        else Main.loggerInfo.info("Get cache: " + cache + " - not found");
+        if (o != null) Main.loggerInfo.info(String.format(LogMassage.GET_CACHE.toString(), cache, o));
+        else {
+            Main.loggerInfo.info(String.format(LogMassage.GET_CACHE.toString(), cache, "not found"));
+            Main.loggerWarn.info(String.format(LogMassage.GET_CACHE.toString(), cache, "not found"));
+        }
         return o;
     }
 
-    /**
-     * Method get the object stored in the cache using rest request
-     * Needs to be overridden according to your request
-     */
-    abstract public void getRest();
-
-    /**
-     * Method delete all cache
-     */
+    @Override
     public void clear() {
         this.caches = new HashMap<>();
-        Main.loggerInfo.info("Clear All cache");
+        Main.loggerInfo.info(String.format(LogMassage.CLEAR_CACHE.toString(), "all"));
     }
 
-    /**
-     * Method delete cache which is specified in the parameter, if it exists
-     * @param cache - Specifies the name of the desired cache for delete
-     */
+    @Override
     public void clear(String cache) {
         this.caches.remove(cache);
-        Main.loggerInfo.info("Clear `" + cache + "` cache");
+        Main.loggerInfo.info(String.format(LogMassage.CLEAR_CACHE.toString(), cache));
     }
-
-    /**
-     * Method delete cache using rest request
-     * Needs to be overridden according to your request
-     */
-    abstract public void clearRest();
 
     /**
      * Method for return count cache
+     *
      * @return - int value which means count cache
      */
     public int size() {
